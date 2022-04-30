@@ -37,7 +37,7 @@ public class ParenthesesChecker {
 
                 // scenario 2: STACK IS NOT EMPTY  ()
 
-                    // however, if- we found closing ")" + stack is not empty
+                    // however, if- we found closing bracket + stack is not empty
 
                 } else {       //else because when all the above fails (all above else in this nest (dark green  region))
 /*
