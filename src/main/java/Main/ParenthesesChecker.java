@@ -46,16 +46,22 @@ public class ParenthesesChecker {
                      if we have an opening in stack of the required type to close the one we have in pointer-
                      remove opening from the stack- happy pair
 
-                     NOTE: needs to be of required type because if we have ( and the last item in stack = },  }
-                     wont close ( , doesn't match.  You could well have the correct type later along the line but
-                     that could mean that it didn't close properly e.g. :   ( a b c < } )
-                     in this example, the last bracket we added would have been }.
+                     NOTE: needs to be of required type- Example:
+                     
+                      original array  { ( a < b c ( } > , push all openings to stack, new array =  a  b c  } >   stack is:  {( < (
+                      assume pointer is at index 3 of new array (i.e. at  "}" ) 
+                      
+                      - take a peek in the stack to see if pointer matches last item added to stack (i.e  "(" ). 
+                      This is not opening match for }  - it suggests we had interfering bracket types
+                      in between our opening and closing  {} and therefore bracket never properly closed
+                      - we can see that in original array.  
+                     
+                   
 
-                     we  have interfering brackets in between that don't allow for a close!
-
-
-                     We will keep matching every closing we come across with an opening of its type from the stack
-                     until the stack is empty
+                     So We will keep matching if and only if  every closing we come across matches with an opening of its type
+                     from the stack. Do this until stack is empty.
+                     
+                     
 */
                     if     ((stackWithCharacters.peek() == '(' && pointer == ')') ||
                             (stackWithCharacters.peek() == '{' && pointer == '}') ||
@@ -70,8 +76,10 @@ public class ParenthesesChecker {
             }
 
         }   // if the stack in  the end is empty, return true - no more pairing needed- all happy pairs
+        
         if (stackWithCharacters.empty()){
             return true;
+            
             // if it's not empty it means that we have some unpaired brackets-
             // pointer found closing but it cannot pair with last added bracket in stack
 
